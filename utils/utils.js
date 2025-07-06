@@ -7,7 +7,9 @@ const pcmd = process.platform === 'linux' ? 'python3' : 'python'
 //initialize child process
 const initProc = (node) => {
 	if (node.proc == null){
-		node.proc = spawn(pcmd, [node.file], ['pipe', 'pipe','pipe'])
+		node.proc = spawn(pcmd, [node.file], {
+          stdio: ['pipe', 'pipe', 'pipe']
+        })
 
 		//handle results
 		node.proc.stdout.on('data', (data) => {

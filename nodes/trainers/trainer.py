@@ -1,9 +1,10 @@
 import json
 import pickle
 import pandas
-import io
 import os
 import sys
+import io  # <--- add this import
+
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../../utils')
 from sklw import SKLW
 
@@ -17,7 +18,7 @@ while True:
     # read request
     data = input()
     try:
-        # load data from request, wrap string in StringIO to fix FutureWarning
+        # load data from request, fix FutureWarning by using StringIO
         df = pandas.read_json(io.StringIO(data), orient='values')
     except:
         # load file specified in the request

@@ -22,8 +22,11 @@ model = load()
 
 while True:
     try:
-        # Read request
-        features = pd.read_json(input(), orient='values')
+        # Read input and parse JSON
+        data = json.loads(input())
+
+        # Convert flat dict to single-row DataFrame
+        features = pd.DataFrame([data])
 
         if model is None:
             model = load()
@@ -34,7 +37,7 @@ while True:
 
         prediction = model.predict(features)
 
-        # Safely convert to JSON serializable
+        # Convert to list if needed
         if hasattr(prediction, 'tolist'):
             prediction = prediction.tolist()
 
